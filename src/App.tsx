@@ -455,7 +455,7 @@ function PricingSection() {
         <div className="pricing-extra scroll-reveal">
           <h3>Додаткові опції</h3>
           <div className="extra-options">
-            {EXTRA_OPTIONS.map((option) => (
+            {EXTRA_OPTIONS.map((option) => option.description ? (
               <details className="faq-item extra-option" key={option.option}>
                 <summary>
                   <span>{option.option}</span>
@@ -463,6 +463,11 @@ function PricingSection() {
                 </summary>
                 <p>{option.description}</p>
               </details>
+            ) : (
+              <div className="faq-item extra-option extra-option-heading" key={option.option}>
+                <span>{option.option}</span>
+                <strong>{option.price}</strong>
+              </div>
             ))}
           </div>
         </div>
@@ -675,13 +680,13 @@ function App() {
     <div className="site-shell min-h-screen tracking-[-0.02em]" style={{ fontFamily: "'Inter', sans-serif" }}>
       <nav className="fixed left-0 right-0 top-0 z-[100] flex items-center justify-between p-4 sm:p-5">
         <BrandLogo />
-        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/30 bg-white/20 px-2 py-2 backdrop-blur-md md:flex">
+        <div className="desktop-nav-pill absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-white/30 bg-white/20 px-2 py-2 backdrop-blur-md md:flex">
           {NAV_LINKS.map((link, index) => (
             <a
               key={link.href}
               href={link.href}
               onClick={closeMobileMenu}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors hover:bg-white/20 hover:text-white ${index === 0 ? "text-white" : "text-white/80"}`}
+              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors hover:bg-white/20 hover:text-white ${index === 0 ? "text-white" : "text-white/80"}`}
             >
               {link.label}
             </a>

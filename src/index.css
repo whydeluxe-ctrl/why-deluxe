@@ -16,6 +16,7 @@
   --text: #f5f3ed;
   --muted: #9c9b94;
   --accent: #e8702a;
+  --tw-ring-color: rgba(232, 112, 42, 0.5);
   --line: rgba(245, 243, 237, 0.13);
 }
 
@@ -68,7 +69,10 @@ select {
   -webkit-tap-highlight-color: transparent;
 }
 
-:focus-visible {
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -161,6 +165,15 @@ select {
 
 .site-shell {
   background: var(--page);
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  .desktop-nav-pill {
+    position: static;
+    margin-left: auto;
+    margin-right: 12px;
+    --tw-translate-x: 0;
+  }
 }
 
 .mobile-nav-panel {
@@ -942,14 +955,16 @@ select {
   width: 100%;
 }
 
-.extra-option summary {
+.extra-option summary,
+.extra-option-heading {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 24px;
 }
 
-.extra-option summary strong {
+.extra-option summary strong,
+.extra-option-heading strong {
   flex: 0 0 auto;
   color: var(--accent);
   font-size: 12px;
