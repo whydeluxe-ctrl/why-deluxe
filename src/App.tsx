@@ -366,32 +366,52 @@ function WorkSection({
 }: {
   onPreview: (item: PortfolioEntry) => void;
 }) {
+  const [activeCategory, setActiveCategory] =
+    useState<(typeof PORTFOLIO_FILTERS)[number]["id"]>("design");
+  const activeItems = PORTFOLIO_ITEMS.filter((item) => item.category === activeCategory);
+
   return (
-    <section className="content-section content-section-muted" id={SECTION_IDS.work}>
+    <section
+      className="content-section content-section-muted portfolio-section"
+      id={SECTION_IDS.work}
+    >
       <div className="page-container">
         <SectionHeading
           eyebrow={BRAND_NAME}
           title={UI.workTitle}
           subtitle={UI.workSubtitle}
         />
-        {PORTFOLIO_FILTERS.map((filter) => {
-          const items = PORTFOLIO_ITEMS.filter((item) => item.category === filter.id);
-          return (
-            <section className="portfolio-category scroll-reveal" key={filter.id}>
-              <h3>{PORTFOLIO_CATEGORY_LABELS[filter.id]}</h3>
-              <div className="portfolio-grid">
-                {items.map((item, index) => (
-                  <PortfolioCard
-                    item={item}
-                    index={index}
-                    key={item.id}
-                    onPreview={onPreview}
-                  />
-                ))}
-              </div>
-            </section>
-          );
-        })}
+        <div className="portfolio-switcher" role="group" aria-label={UI.workTitle}>
+          {PORTFOLIO_FILTERS.map((filter) => (
+            <button
+              type="button"
+              className={`portfolio-filter${activeCategory === filter.id ? " is-active" : ""}`}
+              key={filter.id}
+              aria-pressed={activeCategory === filter.id}
+              onClick={() => setActiveCategory(filter.id)}
+            >
+              {filter.id === "video" ? "Відео" : "Фото"}
+              <span>{PORTFOLIO_ITEMS.filter((item) => item.category === filter.id).length}</span>
+            </button>
+          ))}
+        </div>
+        <section
+          className="portfolio-category"
+          aria-live="polite"
+          aria-label={activeCategory === "video" ? "Відео робіт" : "Фото робіт"}
+        >
+          <h3>{activeCategory === "video" ? "Відео" : "Фото"}</h3>
+          <div className="portfolio-grid">
+            {activeItems.map((item, index) => (
+              <PortfolioCard
+                item={item}
+                index={index}
+                key={item.id}
+                onPreview={onPreview}
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </section>
   );

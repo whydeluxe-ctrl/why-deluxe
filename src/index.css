@@ -559,6 +559,31 @@ input:focus-visible {
   margin-top: 34px;
 }
 
+.portfolio-section {
+  overflow: clip;
+}
+
+.portfolio-switcher {
+  position: sticky;
+  top: 76px;
+  z-index: 20;
+  display: flex;
+  width: fit-content;
+  gap: 8px;
+  margin: -20px 0 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--page) 88%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.portfolio-filter span {
+  color: inherit;
+  font-size: 10px;
+  opacity: 0.72;
+}
+
 .portfolio-category > h3 {
   margin: 0 0 16px;
   color: var(--text);
@@ -1574,6 +1599,11 @@ input:focus-visible {
 
   .service-part {
     padding: 18px;
+  }
+
+  .portfolio-switcher {
+    top: 68px;
+    margin-top: -20px;
   }
 
   .portfolio-grid {
